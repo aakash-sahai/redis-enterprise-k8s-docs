@@ -20,6 +20,8 @@ spec:
           - redis-enterprise-operator
           imagePullPolicy: Always
           env:
+            - name: SKIP_VERSION_CHECKS
+              value: "true"
             - name: WATCH_NAMESPACE
               valueFrom:
                 fieldRef:

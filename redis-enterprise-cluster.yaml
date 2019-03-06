@@ -3,21 +3,21 @@ kind: "RedisEnterpriseCluster"
 metadata:
   name: "redis-enterprise"
 spec:
-  nodes: 3
+  nodes: 7
   persistentSpec:
-    enabled: true
-    storageClassName: "gp2" # ! edit according to infrastructure
+    enabled: false
+    storageClassName: "zeroedthick" # ! edit according to infrastructure
   uiServiceType: LoadBalancer
   username: "admin@acme.com"
   redisEnterpriseNodeResources:
     limits:
       cpu: "4000m"
-      memory: 4Gi
+      memory: 50Gi
     requests:
       cpu: "4000m"
-      memory: 4Gi
+      memory: 10Gi
   redisEnterpriseImageSpec:
-    imagePullPolicy:  IfNotPresent
+    imagePullPolicy:  Always
     repository:       redislabs/redis
-    versionTag:       5.4.0-19
+    versionTag:       5.4.0-19.no_ipv6
 
