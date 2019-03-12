@@ -3,11 +3,11 @@ kind: "RedisEnterpriseCluster"
 metadata:
   name: "redis-enterprise"
 spec:
-  nodes: 7
+  nodes: 9
   persistentSpec:
     enabled: false
     storageClassName: "zeroedthick" # ! edit according to infrastructure
-  uiServiceType: LoadBalancer
+  uiServiceType: ClusterIP
   username: "admin@acme.com"
   redisEnterpriseNodeResources:
     limits:
