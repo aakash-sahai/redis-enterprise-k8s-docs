@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: redis-ui-ing
+  annotations:
+    virtual-server.f5.com/ip: "172.16.59.165"
+    virtual-server.f5.com/partition: "k8s01"
+    virtual-server.f5.com/https-port: "8443"
+    virtual-server.f5.com/serverssl: "/Common/serverssl" 
+    ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/allow-http: "false"
+    virtual-server.f5.com/balance: "least-connections-node"
+    virtual-server.f5.com/health: |
+      [
+        {
+          "path": "172.16.59.165/",
+          "send": "HTTP GET /",
+          "interval": 5,
+          "timeout": 10
+        }
+      ]
+spec:
+  backend:
+    serviceName: redis-enterprise-ui
+    servicePort: 8443
+  tls:
+    - secretName: /Common/clientssl
